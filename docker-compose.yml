@@ -1,0 +1,30 @@
+version: '3.8'
+services:
+    web:
+        container_name: php-apache
+        build:
+            context: .
+            dockerfile: Dockerfile
+        volumes:
+            - ./:/var/www/html
+        ports:
+            - 8000:80
+        networks:
+            - default
+    mysql:
+        image: mysql:latest
+        command: --default-authentication-plugin=mysql_native_password
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: visitas
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        ports:
+            - 8888:80
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: visitas
+            PMA_HOST: mysql
+        depends_on:
+            - mysql
+

@@ -1,0 +1,4 @@
+_static/fotos/*.jpg
+_static/fotos/*.png
+
+/vendor/

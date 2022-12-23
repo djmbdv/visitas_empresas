@@ -1,0 +1,63 @@
+.image-table{
+	max-height: 80px;
+}
+.dropdown-menu-right {
+    right: 0;
+    left: auto;
+}
+.row {
+    margin-right: 0px; 
+    margin-left: 0px;
+}
+.form-control-home{
+	min-height: 40px;
+	margin: 25px;
+	font-size: 1.5rem;
+}
+
+.form-group{
+	padding-top: 1rem;
+}
+.autocomplete-items{
+	position: absolute;
+	z-index: 10;
+	background:white;
+	min-width: 60%;
+}
+
+.table{
+	font-size: 0.876rem;
+}
+.item-autocomplete{
+	padding: 2px;
+	font-size: 15px;
+	width: 100%;
+	margin:2px;
+	border-radius: .25rem;
+	border: 1px solid #007bff;
+	cursor: pointer;
+}
+.item-autocomplete:hover{
+	font-weight: bold;
+}
+.input-invalid{
+	border: 1px solid red;
+	font-weight: normal;
+}
+.input-success{
+	font-weight: bold;
+	border: 1px solid green;
+}
+.marco-foto{
+	background: #007bff !important;
+}
+.page-item.active {
+	font-weight: bold;
+}
+.image-table{
+	cursor: zoom-in;
+}
+th{
+	font-weight: bold;
+	padding: 10px; 
+}

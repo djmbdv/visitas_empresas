@@ -1,0 +1,20 @@
+{
+    "name": "rpcs_solutions/visitas",
+    "description": "Control de Visitas",
+    "type": "project",
+    "require": {
+        "phpoffice/phpspreadsheet": "dev-master",
+        "phpmailer/phpmailer": "dev-master"
+    },
+    "license": "private",
+    "authors": [
+        {
+            "name": "David José Márquez Batiz",
+            "email": "djmbdv@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "config": {
+        "process-timeout": 1000
+    }
+}
