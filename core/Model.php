@@ -40,7 +40,7 @@ abstract class Model{
 		return self::all($count, $page,$loaded,$sql);
 	}
 
-	public static function all_where_and($a = array(),$count = null, $page = null,$loaded = false, $order = "create_at", $desc = true ){
+	public static function all_where_and($a = array(),$count = null, $page = null,$loaded = false, $order = "created_at", $desc = true ){
 		if(!self::table_exist())self::create_table();
 		$sql = "";
 		foreach ($a as $key => $value) {
@@ -50,7 +50,7 @@ abstract class Model{
 		return self::all($count, $page,$loaded,$sql, $order,$desc);
 	}
 
-	public function all_inner_join_and($tables,$condiciones = array(),$count = null, $page = null,$loaded = false, $order = "create_at", $desc = true ){
+	public static function all_inner_join_and($tables,$condiciones = array(),$count = null, $page = null,$loaded = false, $order = "created_at", $desc = true ){
 		if(!self::table_exist())self::create_table();
 		$sql = "";
 		foreach ($tables as $key => $table) {
@@ -89,7 +89,7 @@ abstract class Model{
 		foreach (array_diff(self::get_vars(),$hide) as $key ) {
 			$o->{$key} = $this->{$key};
 		}
-		$o->create_at = $this->get_create_at();
+		$o->created_at = $this->get_created_at();
 		$o->modified_at = $this->get_modified_at();
 		$o->presentation = $this->to_str();
 		$o->id = $this->get_key();
@@ -182,15 +182,15 @@ abstract class Model{
 		$res = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		return $res[0]['modified_at'];
 	}
-	public function get_create_at(){
+	public function get_created_at(){
 		$pdo = DB::get();
 		$table = self::get_table_name();
 		$index = self::$index_name;
 		$my_index = $this->{$index};
-		$stmt  = $pdo->prepare("select create_at from $table where $index = '$my_index'");
+		$stmt  = $pdo->prepare("select created_at from $table where $index = '$my_index'");
 		$stmt->execute();
 		$res = $stmt->fetchAll(PDO::FETCH_ASSOC);
-		return $res[0]['create_at'];
+		return $res[0]['created_at'];
 	}
 
 	public static function presentation($o){
@@ -215,7 +215,7 @@ abstract class Model{
 		return array();
 	}
 
-	public static function all($count = null, $page = null,$loaded = false,$sql_aditiional = "", $order = "create_at", $desc = true){
+	public static function all($count = null, $page = null,$loaded = false,$sql_aditiional = "", $order = "created_at", $desc = true){
 		if(!get_called_class()::table_exist())self::create_table();
 		$pdo = DB::get();
 		$table = self::get_table_name();
@@ -455,7 +455,7 @@ abstract class Model{
 				$sql.=",$att ".self::search_type($att);
 			}
 		}
-		$sql.=",`create_at` timestamp NOT NULL DEFAULT current_timestamp(),`modified_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() );";
+		$sql.=",`created_at` timestamp NOT NULL DEFAULT current_timestamp(),`modified_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() );";
 		$pdo->query($sql);
 		get_called_class()::seeds();
      	return true;

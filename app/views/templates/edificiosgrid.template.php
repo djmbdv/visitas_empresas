@@ -34,7 +34,7 @@ foreach($this->T('items') as $it):
 		<img style="width: 100px;" class="px-auto mx-auto " src="<?= $this->S("images/edificio.png") ?>" class="card-img-top" alt="<?= $it->nombre ?>">
   		<div class="card-body">	
 		
-		 <h5 class="card-title"><?= $it->nombre ?></h5>
+		 <h5 class="card-title"><?= $it->name ?></h5>
 
 	
 		

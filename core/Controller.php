@@ -4,7 +4,8 @@ abstract class Controller
 {
 
 	public $argument;
-
+	public $_POST;
+	public $_PUT;
 	public function main_method($method = "index",$argument =  null){
 		$this->argument = $argument;
 		if(method_exists($this,$method)){
@@ -45,7 +46,7 @@ abstract class ControllerRest extends Controller{
 					$this->get();
 				break;
 				case 'POST': 
-					$this->_POST= $_POST;
+					$this->_POST = $_POST;
 					$this->post();
 				break;
 				case 'PUT':

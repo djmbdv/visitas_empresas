@@ -45,22 +45,23 @@ body {
 }</style>
     <div class="text-center">
       <form class="form-signin" method="post">
-        <img class="mb-4" src="<?=$this->S("images/casita.png")?>" alt="" style="width: 50px;background-color: blue;">
+        <img class="mb-4" src="<?=$this->S("images/casita.png")?>" alt="" style="width: 100px;background-color: blue;">
+        <h2> Visitas |<b>Enterprice</b></h2>
     <?php
        	if($this->T("error") == 1):?>
        	<h5 class="text-danger">Error en los datos</h5>
     <?php endif; ?>
-        <h1 class="h3 mb-3 font-weight-normal">Acceso</h1>
+        <h5 class="h5 mb-3 font-weight-normal">Acceso</h5>
         <label for="inputEmail" class="sr-only">Usuario</label>
         <input type="text" name="username" id="inputEmail" class="form-control" placeholder="Username" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
         <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-        <div class="checkbox mb-3">
+        <!--div class="checkbox mb-3">
           <label>
             <input type="checkbox" value="remember-me"> Remember me
           </label>
-        </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        </div-->
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Acceder</button>
       </form>
     </div>
 <?php

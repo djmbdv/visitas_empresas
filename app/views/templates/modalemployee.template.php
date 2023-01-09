@@ -1,5 +1,5 @@
 <?php
-class ModalresidenteTemplate extends Template{
+class ModalemployeeTemplate extends Template{
 	public $camara;
 
 function config(){
@@ -21,21 +21,21 @@ function config(){
 
 		$this->add_part("campo".ucfirst($v),"campo", $campo);
 	}
-	$this->add_part("campoEdificio","campo",
-		 array('name' => "edificio" ,
+	$this->add_part("campoWorkspace","campo",
+		 array('name' => "workspace" ,
 		 		'autocomplete' => false,
 		 		'required' => true,
-		 		'label' =>"Edificio",
-		 		'placeholder'=> "Seleccione un Edificio",
-		 		'end_point'=> '/api/edificios/',
+		 		'label' =>"Workspace",
+		 		'placeholder'=> "Seleccione un Workspace",
+		 		'end_point'=> '/api/workspaces/',
 		 		'autocomplete_att'=>'s',
-		 		'clase'=> 'edificio',
+		 		'clase'=> 'workspace',
 		 	//	'add_class' => 'col-md-6',
 		 		'form_type' => 'select',
 		 //		'size'=> 'lg',
 		 		'autoload'=>true,
 		 		'attributes'=>  array('s' => "" ),
-		 		'children' => ['inputApartamento']
+		 		'children' => ['inputSection']
 		  )
 		);
 }
@@ -51,7 +51,7 @@ function render(){?>
 	      </div>
 	      <div class="modal-body">
 	        <form id="form-modal" method="post">
-	        <?php $this->render_part("campoEdificio"); ?>
+	        <?php $this->render_part("campoWorkspace"); ?>
 			  <?php foreach ($this->T("modal_vars") as $v):
 			  	$this->render_part("campo".ucfirst($v));
 			  	?>

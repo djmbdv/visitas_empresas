@@ -3,11 +3,11 @@ require_once "core/View.php";
 /**
  * 
  */
-class ApartamentosView extends View
+class EmployeesView extends View
 {
 	
 	function config()
 	{
-		$this->set_template("apartamentos");
+		$this->set_template("employees");
 	}
 }

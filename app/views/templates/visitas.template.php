@@ -12,7 +12,7 @@ class VisitasTemplate extends Template{
 		 array('name' => "visitado" ,
 		 		'autocomplete' => false,
 		 		'placeholder'=> "Persona que visitó",
-		 		'end_point'=> '/api/habitantes/',
+		 		'end_point'=> '/api/employees/',
 		 		'autocomplete_att'=>'s',
 		 		'add_class' => 'col mt-auto',
 		 		'form_type' => 'select',
@@ -20,29 +20,29 @@ class VisitasTemplate extends Template{
 		 		'attributes'=>  array('s' => "" ),
 		  )
 		);
-$this->add_part("campoEdificio","campo",
-		 array('name' => "edificio" ,
+$this->add_part("campoWorkspace","campo",
+		 array('name' => "workspace" ,
 		 		'autocomplete' => false,
-		 		'placeholder'=> "Edificio",
-		 		'end_point'=> '/api/edificios/',
+		 		'placeholder'=> "Empresa",
+		 		'end_point'=> '/api/workspaces/',
 		 		'autocomplete_att'=>'s',
-		 		'clase'=> 'edificio',
+		 		'clase'=> 'workspace',
 		 		'add_class' => 'mt-auto col',
 		 		'form_type' => 'select',
 		 		'size'=>'sm',
 		 		'autoload'=>true,
 		 		'attributes'=>  array('s' => "" ),
-		 		'children' => ['inputApartamento'],
+		 		'children' => ['inputSection'],
 		  )
 		);
 
-$this->add_part("campoApartamento","campo",
-		 array('name' => "apartamento" ,
+$this->add_part("campoSection","campo",
+		 array('name' => "section" ,
 		 		'autocomplete' => false,
-		 		'placeholder'=> "Apartamento",
-		 		'end_point'=> '/api/apartamentos/',
+		 		'placeholder'=> "Oficina",
+		 		'end_point'=> '/api/sections/',
 		 		'autocomplete_att'=>'s',
-		 		'clase'=> 'apartamento',
+		 		'clase'=> 'section',
 		 		'add_class' => 'mt-auto col',
 		 		'form_type' => 'select',
 		 		'size'=>'sm',
@@ -69,8 +69,8 @@ $this->add_part("campoApartamento","campo",
 	<div class="form-group col "> 
 	<label class="small">Hasta</label> <input id="inputHasta" name="hasta" class="form-control form-control-sm" type="date" name="" value="<?= $this->filtros['hasta'] ?? '' ?>">
 	</div>
-	<?php $this->render_part("campoEdificio");?>
-			<?php $this->render_part("campoApartamento");?>
+	<?php $this->render_part("campoWorkspace");?>
+			<?php $this->render_part("campoSection");?>
 	<div class="form-group col-md-2  mt-auto "> 
 		<button class="btn btn-warning" type="submit" ><i class="fa fa-filter"></i> Filtrar</button>
 	</div>

@@ -14,7 +14,7 @@ class HomeTemplate extends Template{
 		 		'autocomplete' => false,
 		 		'required' => true,
 		 		'placeholder'=> "Nombre de la persona a visitar",
-		 		'end_point'=> '/api/habitantes/',
+		 		'end_point'=> '/api/employees/',
 		 		'autocomplete_att'=>'s',
 		 		'add_class' => 'col-md-12',
 		 		'form_type' => 'select',
@@ -22,14 +22,14 @@ class HomeTemplate extends Template{
 		 		'size'=> 'lg'
 		  )
 		);
-$this->add_part("campoApartamento","campo",
-		 array('name' => "apartamento" ,
+$this->add_part("campoSection","campo",
+		 array('name' => "section" ,
 		 		'autocomplete' => false,
 		 		'required' => true,
-		 		'placeholder'=> "Apartamento a donde se dirige",
-		 		'end_point'=> '/api/apartamentos/',
+		 		'placeholder'=> "Oficina donde se dirige",
+		 		'end_point'=> '/api/sections/',
 		 		'autocomplete_att'=>'s',
-		 		'clase'=> 'apartamento',
+		 		'clase'=> 'section',
 		 		'add_class' => 'col-md-6',
 		 		'form_type' => 'select',
 		 		'attributes'=>  array('s' => "" ),
@@ -37,20 +37,20 @@ $this->add_part("campoApartamento","campo",
 		 		'children' => ['inputVisitado']
 		  )
 		);
-$this->add_part("campoEdificio","campo",
-		 array('name' => "edificio" ,
+$this->add_part("campoWorkspace","campo",
+		 array('name' => "workspace" ,
 		 		'autocomplete' => false,
 		 		'required' => true,
 		 		'placeholder'=> "Torre a donde se dirige",
-		 		'end_point'=> '/api/edificios/',
+		 		'end_point'=> '/api/workspaces/',
 		 		'autocomplete_att'=>'s',
-		 		'clase'=> 'edificio',
+		 		'clase'=> 'workspace',
 		 		'add_class' => 'col-md-6',
 		 		'form_type' => 'select',
 		 		'size'=> 'lg',
 		 		'autoload'=>true,
 		 		'attributes'=>  array('s' => "" ),
-		 		'children' => ['inputApartamento']
+		 		'children' => ['inputSection']
 		  )
 		);
 
@@ -72,8 +72,8 @@ $this->add_part("campoEdificio","campo",
 		<h4 class="text-center p-3 mt-3">DATOS</h4> 
 		<form  class="form-row" action="/foto" method="post">
 
-			<?php $this->render_part("campoEdificio");?>
-			<?php $this->render_part("campoApartamento");?>
+			<?php $this->render_part("campoWorkspace");?>
+			<?php $this->render_part("campoSection");?>
 			<?php $this->render_part("campoVisitado");?>
 			<div class="form-group  col-md-12">
 				<input class="form-control form-control-lg " type="text" name="nombre" placeholder="Su Nombre y Apellido" required="" />

@@ -43,7 +43,7 @@ class AccountTemplate extends Template{
 		?>
 <div class="container pb-4 mb-4">
 	<a class="btn " href=".."><i class="fa fa-arrow-left"></i> Menú </a>
-<form class="row" id="form-modal" method="put" action="/dashboard/usuarios">
+<form class="row" id="form-modal" method="put" action="/dashboard/users">
 	<div class="container">
 	<h1 class="text-center">Account</h1>
 	<?php $this->render_part("campoNombre");?>

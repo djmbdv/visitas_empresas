@@ -4,6 +4,7 @@ class Template {
 	public $parts;
 	public $parent;
 	public $child;
+	public $model;
 	function __construct($model){
 		$this->parts = [];
 		$this->model = $model;
@@ -24,7 +25,7 @@ class Template {
 	//	$this->child->set_parent($this);
 	}
 
-	public function set_parent_object(Template $patent){
+	public function set_parent_object(Template $parent){
 		$this->parent = $parent; 
 	}
 

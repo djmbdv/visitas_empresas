@@ -11,7 +11,7 @@ require_once "core/Session.php";
 /**
  * 
  */
-class EdificiosController extends ControllerRest
+class WorkspacesController extends ControllerRest
 {
 
 	public function get()
@@ -30,23 +30,23 @@ class EdificiosController extends ControllerRest
 		$page = $page?$page:1;	
 		if(!$user->is_admin()){
 			$condicion = [['cliente','=',$user->get_key()]];	
-			$vars = array_filter(EdificioModel::get_vars(),function($a){ return $a != 'cliente';});
-			$count = EdificioModel::count($condicion);
-			$items = EdificioModel::all_where_and($condicion,20,$page);	
+			$vars = array_filter(WorkspaceModel::get_vars(),function($a){ return $a != 'client';});
+			$count = WorkspaceModel::count($condicion);
+			$items = WorkspaceModel::all_where_and($condicion,20,$page);	
 		}else{
-			$vars = EdificioModel::get_vars();
-			$count =EdificioModel::count();
-			$items = EdificioModel::all(20,$page);
+			$vars = WorkspaceModel::get_vars();
+			$count =WorkspaceModel::count();
+			$items = WorkspaceModel::all(20,$page);
 		}
-		$hv = new EdificiosView( array(
+		$hv = new WorkspacesView( array(
 			'items' => $items,
 			'user'=> $user,
 			"table_vars" => $vars,
 			"modal_vars" => $vars,
-			"modal_class" => 'EdificioModel',
+			"modal_class" => 'WorkspaceModel',
 			'page'=> $page,
 			'count'=> $count,
-			'title'=>'Edificios'
+			'title'=>'Empresas'
 		));
 		return $hv->render();
 	}
@@ -56,12 +56,12 @@ class EdificiosController extends ControllerRest
 			header('location: /login/');
 			return;
 		}
-		$u = new EdificioModel();
-		if(isset($this->_POST["nombre"])  && strlen($this->_POST["nombre"]) >= 1)$u->nombre = $this->_POST["nombre"]; 
+		$u = new WorkspaceModel();
+		if(isset($this->_POST["name"])  && strlen($this->_POST["name"]) >= 1)$u->name = $this->_POST["name"]; 
 	//	if(isset($this->_POST["direccion"]))$u->direccion = $this->_POST["direccion"];
-		if(isset($this->_POST["cliente"]) && $user->is_admin()){
+		if(isset($this->_POST["client"]) && $user->is_admin()){
 			$a  = new UserModel();
-			$a->ID = $this->_POST["cliente"];
+			$a->ID = $this->_POST["client"];
 			$u->cliente = $a;
 		}else {
 			$u->cliente = $user;
@@ -81,13 +81,13 @@ class EdificiosController extends ControllerRest
 			header('location: /login/');
 			return;
 		}
-		$u = new EdificioModel();
+		$u = new WorkspaceModel();
 		if(isset($this->_PUT["key"]))$u->ID = $this->_PUT["key"]; 
-		if(isset($this->_PUT["nombre"]))$u->nombre = $this->_PUT["nombre"]; 
+		if(isset($this->_PUT["name"]))$u->name = $this->_PUT["name"]; 
 //		if(isset($this->_PUT["direccion"]))$u->direccion = $this->_PUT["direccion"];
-		if(isset($this->_PUT["cliente"]) && $user->is_admin()){
+		if(isset($this->_PUT["client"]) && $user->is_admin()){
 			$a  = new UserModel();
-			$a->ID = $this->_PUT["cliente"];
+			$a->ID = $this->_PUT["client"];
 			$u->cliente = $a;
 		}else {
 			$u->cliente = $user;
@@ -104,7 +104,7 @@ class EdificiosController extends ControllerRest
 		$key = $this->get_param('key');
 		
 		$respose = new stdClass;
-		if(EdificioModel::remove($key))
+		if(WorkspaceModel::remove($key))
 		$respose->ok = true;
 		else $respose->errorMsj = "Error al eliminar";
 		header("Content-type:application/json");

@@ -16,7 +16,6 @@ class ApartamentosTemplate extends Template{
 		$p = $this->T("page");
 		$this->render_part("topbar"); 
 		$this->render_part("modal");
-
 		$this->render_part("viewmodal");
 		$this->render_part("askmodal");
 		?>
@@ -26,7 +25,7 @@ class ApartamentosTemplate extends Template{
 	<div class="row">
 	<h1 class="text-center"><?= $this->T('title') ?></h1>
 	<div class="col-md-3 col-sm-6">
-	<a type="button"  data-toggle="modal" data-target="#formModal" class="btn btn-warning btn-add  m-3"><i class="fa fa-home"></i> Nuevo Apartamento</a>
+	<a type="button"  data-toggle="modal" data-target="#formModal" class="btn btn-warning btn-add  m-3"><i class="fa fa-home"></i> Nueva Seccion</a>
 	</div>
 	<hr/>
 <?php 
@@ -38,7 +37,6 @@ if($c > 0):
 </div>
 <?php $this->render_part("paginator");?>
 </div>
-<?php 
-
+<?php
 	}
 }

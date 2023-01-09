@@ -72,7 +72,7 @@ foreach($this->T('items') as $it):
 endif; 
 endforeach; 
 	if(!$hide_create):?>
-		<td><?= $it->get_create_at() ?></td>
+		<td><?= $it->get_created_at() ?></td>
 		<?php
 	endif;
 		if(!$hide_modified):?>

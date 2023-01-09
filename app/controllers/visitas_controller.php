@@ -34,16 +34,16 @@ class VisitasController extends ControllerRest
 		if(!$user->is_admin()){
 			$condicion = [['cliente','=',$user->get_key()]];
             if($visitado)$condicion[]=["visitado",'=',$visitado];
-            if($desde)$condicion[]=["create_at",'>=', $desde];
-            if($hasta)$condicion[]=["create_at", '<=',$hasta.=" 23:59:59"];
+            if($desde)$condicion[]=["created_at",'>=', $desde];
+            if($hasta)$condicion[]=["created_at", '<=',$hasta.=" 23:59:59"];
 			$vars = array_filter(VisitaModel::get_vars(),function($a){ return $a != 'cliente';});
 			$count = VisitaModel::count($condicion);
 			$items = VisitaModel::all_where_and($condicion,20,$page);	
 		}else{
 			$condicion = [];
 			if($visitado)$condicion[]=["visitado",'=',$visitado];
-            if($desde)$condicion[]=["create_at",'>=', $desde];
-            if($hasta)$condicion[]=["create_at", '<=',$hasta.=" 23:59:59"];
+            if($desde)$condicion[]=["created_at",'>=', $desde];
+            if($hasta)$condicion[]=["created_at", '<=',$hasta.=" 23:59:59"];
 			$vars = VisitaModel::get_vars();
 			$count = VisitaModel::count($condicion);
 			$items = VisitaModel::all_where_and($condicion,20,$page);
@@ -70,14 +70,14 @@ class VisitasController extends ControllerRest
 		$desde = $this->get_param("desde");
 		$hasta = $this->get_param("hasta");
 		if(!$user->is_admin()){
-			$cc = [['cliente','=',$user->get_key()]];
+			$cc = [['client','=',$user->get_key()]];
 		}
 		$condv = $cc;
-		if($desde)$condv[]=["create_at",'>=', $desde];
-        if($hasta)$condv[]=["create_at", '<=',$hasta.=" 23:59:59"];
-		$apartamento =  $this->get_param("apartamento");
+		if($desde)$condv[]=["created_at",'>=', $desde];
+        if($hasta)$condv[]=["created_at", '<=',$hasta.=" 23:59:59"];
+		$apartamento =  $this->get_param("section");
 
-		$edi =  EdificioModel::all_where_and($cc,null,true);
+		$workspace =  WorkspaceModel::all_where_and($cc,null,true);
 	
 
 		// Set document properties
@@ -90,15 +90,14 @@ class VisitasController extends ControllerRest
 
 		$spreadsheet->setActiveSheetIndex(0);
 		$build = 1;
-		foreach ($edi as $edificio) {
+		foreach ($workspace as $w) {
 			$spreadsheet->createSheet();
 			$linea = 1;
 			$condicion = $cc;
-			$condicion[] = ["edificio", "=","{$edificio->ID}"];
-			$apartamentos = ApartamentoModel::all_where_and($condicion,null,null, false);
+			$condicion[] = ["workspace", "=","{$w->ID}"];
+			$apartamentos = SectionModel::all_where_and($condicion,null,null, false);
 			//print_r($apartamentos);
 			$spreadsheet->setActiveSheetIndex($build)
-
 			->setCellValue('C'.$linea, "NOMBRE")
 			->setCellValue('B'.$linea, "IDENTIFICACION")
 			->setCellValue('A'.$linea, "FECHA")
@@ -108,23 +107,23 @@ class VisitasController extends ControllerRest
 			
 			foreach($apartamentos as $apartamento) {
 				$cond = $condv;
-				$cond[] = ["destino","=","{$apartamento->ID}"];
+				$cond[] = ["host","=","{$apartamento->ID}"];
 				$visitas = VisitaModel::all_where_and($cond,null,null,true);
 				//print_r($visitas);
 				foreach ($visitas as $visita) {
 					//print_r($myWorkSheet);
 					$spreadsheet->setActiveSheetIndex($build)
-					->setCellValue('C'.$linea, $visita->nombre)
-					->setCellValue('B'.$linea, "".$visita->identificacion)
-					->setCellValue('A'.$linea, "".$visita->get_create_at())
-					->setCellValue('D'.$linea,$visita->destino->load()->nombre);
+					->setCellValue('C'.$linea, $visita->name)
+					->setCellValue('B'.$linea, "".$visita->document_id)
+					->setCellValue('A'.$linea, "".$visita->get_created_at())
+					->setCellValue('D'.$linea,$visita->host->load()->name);
 					$linea++;
 				}
 					
 			}
             
             $invalidCharacters = $spreadsheet->setActiveSheetIndex($build)->getInvalidCharacters();
-            $title = str_replace($invalidCharacters, '_', $edificio->load()->nombre);
+            $title = str_replace($invalidCharacters, '_', $w->load()->name);
             $spreadsheet->getActiveSheet()->setTitle($title);
 			$build++;
 			
@@ -140,7 +139,5 @@ class VisitasController extends ControllerRest
 		header('Cache-Control: cache, must-revalidate'); // HTTP/1.1
 		header('Pragma: public'); // HTTP/1.0
 		$writer->save('php://output');
-
-
 	}
 }

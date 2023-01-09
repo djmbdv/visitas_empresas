@@ -3,11 +3,11 @@ require_once "core/View.php";
 /**
  * 
  */
-class HabitantesView extends View
+class WorkspacesView extends View
 {
 	
 	function config()
 	{
-		$this->set_template("habitantes");
+		$this->set_template("workspaces");
 	}
 }

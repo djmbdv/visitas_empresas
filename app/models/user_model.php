@@ -39,41 +39,40 @@ class UserModel extends Model{
  		);
 	}
 
-	public function get_habitantes_count(){
-		$cond = [["cliente","=",$this->get_key()]];
-		return HabitanteModel::count($cond);
+	public function get_employees_count(){
+		$cond = [["client","=",$this->get_key()]];
+		return EmployeeModel::count($cond);
 	}
-	public function get_edificios_count(){
+	public function get_workspaces_count(){
 
-		$cond = [["cliente","=",$this->get_key()]];
-		return EdificioModel::count($cond);
+		$cond = [["client","=",$this->get_key()]];
+		return WorkspaceModel::count($cond);
 	}
-	public function get_apartamentos_count(){
-		$cond = [["cliente","=",$this->get_key()]];
-		return ApartamentoModel::count($cond);
+	public function get_sections_count(){
+		$cond = [["client","=",$this->get_key()]];
+		return SectionModel::count($cond);
 	}
 	public static function seeds(){
 		$tipos = TipoModel::all();
 		$client  = new UserModel();
-		$client->username = 'cliente';
-		$client->name = 'Cliente de Prueba';
+		$client->username = 'client';
+		$client->name = 'Test Client';
 		$client->password =md5( '1234');
-		$client->email = "client@ejemplo.com";
-		$client->titulo = "Complejo de prueba";
+		$client->email = "client@visitas.test";
+		$client->titulo = "";
 		$client->tipo = $tipos[1];
 		$client->pin = "1234";
 		$client->plan = PlanModel::all()[0];
 		$client->save();
 		$client  = new UserModel();
-		$client->username = 'fabian';
+		$client->username = 'admin';
 		$client->name = 'Fabian Espejo';
 		$client->password =md5( 'fabianjose');
 		$client->titulo = "Complejo de prueba";
-		$client->email = "fabian@remotepcsolutions.com";
+		$client->email = "admin@visitas.test";
 		$client->tipo = $tipos[0];
 		$client->pin = "1234";
 		$client->save();
-		//exit();
 	}
 	public static function user_logged(){
 		Session::load();
@@ -81,8 +80,8 @@ class UserModel extends Model{
 			return self::find_username(Session::$values["username"]);
 		else return null;
 	}
-	public static function search_nombre($nombre, $cantidad = 20){
-		$a = self::all_where_like("name",$nombre,$cantidad,null,true);
+	public static function search_name($name, $count = 20){
+		$a = self::all_where_like("name",$name,$count,null,true);
 		$k = array_map(function($a){return $a->no_class_values(); }, $a);
 		return json_encode($k);
 	}
@@ -112,7 +111,7 @@ class UserModel extends Model{
 	}
 
 	public static function p_cargo($c){
-		return "Apartamentos: ".$c->get_apartamentos_count()."<br>Edificios: ".$c->get_edificios_count();
+		return "Sections: ".$c->get_sections_count()."<br>Workspaces: ".$c->get_workspaces_count();
 	}
 	public static function array_presentation(){
 		return [ "cargo" => "p_cargo"];

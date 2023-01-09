@@ -24,37 +24,37 @@ $main_router->link("visita",$fc,"visita");
 
 		//ruta /registro/visitas
 		$vc = new VisitasController();
-		$hc = new HabitantesController();
+		$hc = new EmployeesController();
 		$uc = new UsersController();
-		$ac = new ApartamentosController();
-		$ec = new EdificiosController();
+		$ac = new SectionsController();
+		$ec = new WorkspacesController();
 		$adc = new AdministracionController();
 
 	$dashboard_router->link("visitas",$vc);
 	$dashboard_router->link("reporte", $vc, "reporte");
-	$dashboard_router->link("residentes", $hc);
-	$dashboard_router->link("usuarios", $uc);
+	$dashboard_router->link("employees", $hc);
+	$dashboard_router->link("users", $uc);
 	$dashboard_router->link("account",$uc,"account");
-	$dashboard_router->link("apartamentos", $ac);
-	$dashboard_router->link("apartamentos/edificio", $ac);
+	$dashboard_router->link("sections", $ac);
+	$dashboard_router->link("sections/workspace", $ac);
 	$dashboard_router->link("crearApartamentos",$ac,"crear_apartamentos");
-	$dashboard_router->link("edificios", $ec);
+	$dashboard_router->link("workspaces", $ec);
 	$dashboard_router->link("administracion", $adc);
 	$api_router = new Router();
-	$api_router->link("habitante",$apic,"get_habitante");
-	$api_router->link("habitantes",$apic,"search_habitantes");
+	$api_router->link("employee",$apic,"get_employee");
+	$api_router->link("employees",$apic,"search_employees");
 	$api_router->link("users",$apic,"search_users");
 	$api_router->link("user",$apic,"get_user");
 	$api_router->link("tipos",$apic,"search_tipos");
 	$api_router->link("tipo",$apic,"get_tipo");
 	$api_router->link("visita",$apic,"get_visita");
 	$api_router->link("visitas",$apic,"search_visitas");
-	$api_router->link("apartamento",$apic,"get_apartamento");
-	$api_router->link("apartamentos",$apic,"search_apartamentos");
-	$api_router->link("edificios",$apic,"search_edificios");
+	$api_router->link("section",$apic,"get_section");
+	$api_router->link("sections",$apic,"search_sections");
+	$api_router->link("workspaces",$apic,"search_workspaces");
 	$api_router->link("plans",$apic,"search_plans");
 
-	$api_router->link("edificio",$apic,"get_edificio");
+	$api_router->link("workspace",$apic,"get_workspace");
 	
 
 $main_router->link("api",$api_router);

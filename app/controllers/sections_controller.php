@@ -7,7 +7,7 @@ require_once "core/Session.php";
 /**
  * 
  */
-class ApartamentosController extends ControllerRest
+class SectionsController extends ControllerRest
 {
 	public function get()
 	{
@@ -24,24 +24,24 @@ class ApartamentosController extends ControllerRest
 		$page = $page?$page:1;	
 
 		if(!$user->is_admin()){
-			$condicion = [['cliente','=',$user->get_key()]];	
-			$vars = array_filter(ApartamentoModel::get_vars(),function($a){ return $a != 'cliente';});
-			$count = ApartamentoModel::count($condicion);
-			$items = ApartamentoModel::all_where_and($condicion,20,$page);	
+			$condicion = [['client','=',$user->get_key()]];	
+			$vars = array_filter(SectionModel::get_vars(),function($a){ return $a != 'client';});
+			$count = SectionModel::count($condicion);
+			$items = SectionModel::all_where_and($condicion,20,$page);	
 		}else{
-			$vars = ApartamentoModel::get_vars();
-			$count = ApartamentoModel::count();
-			$items = ApartamentoModel::all(20,$page);
+			$vars = SectionModel::get_vars();
+			$count = SectionModel::count();
+			$items = SectionModel::all(20,$page);
 		}
-		$hv = new ApartamentosView( array(
+		$hv = new SectionsView( array(
 			'items' => $items,
 			'user'=> $user,
 			"table_vars" => $vars,
 			"modal_vars" => $vars,
-			"modal_class" => 'ApartamentoModel',
+			"modal_class" => 'SectionModel',
 			'page'=> $page,
 			'count'=> $count,
-			'title'=>'Apartamentos'
+			'title'=>'Sections'
 		));
 		return $hv->render();
 	}
@@ -51,7 +51,7 @@ class ApartamentosController extends ControllerRest
 		$key = $this->get_param('key');
 		
 		$respose = new stdClass;
-		if(ApartamentoModel::remove($key))
+		if(SectionModel::remove($key))
 		$respose->ok = true;
 		else $respose->errorMsj = "Error al eliminar";
 		header("Content-type:application/json");
@@ -64,21 +64,21 @@ class ApartamentosController extends ControllerRest
 			header('location: /login/');
 			return;
 		}
-		$u = new ApartamentoModel();
+		$u = new SectionModel();
 		if(isset($this->_PUT["key"]))$u->ID = $this->_PUT["key"]; 
-		if(isset($this->_PUT["nombre"]))$u->nombre = $this->_PUT["nombre"]; 
+		if(isset($this->_PUT["name"]))$u->name = $this->_PUT["name"]; 
 		
-		if(isset($this->_PUT["edificio"])){
-			$a  = new EdificioModel();
-			$a->ID = $this->_PUT["edificio"];
-			$u->edificio = $a;
+		if(isset($this->_PUT["workspace"])){
+			$a  = new WorkspaceModel();
+			$a->ID = $this->_PUT["workspace"];
+			$u->workspace = $a;
 		}
-		if(isset($this->_PUT["cliente"]) && $user->is_admin()){
+		if(isset($this->_PUT["client"]) && $user->is_admin()){
 			$a  = new UserModel();
-			$a->ID = $this->_PUT["cliente"];
-			$u->cliente = $a;
+			$a->ID = $this->_PUT["client"];
+			$u->client = $a;
 		}else {
-			$u->cliente = $user;
+			$u->client = $user;
 		}
 		$respose = new stdClass;
 		if($u->save())
@@ -90,10 +90,10 @@ class ApartamentosController extends ControllerRest
 	}
 
 
-	public function crear_apartamentos(){
+	public function crear_sections(){
 		$user = UserModel::user_logged();
 		$data = ['user'=> $user];
-		$amv = new ApartamentosmenuView($data);
+		$amv = new SectionsmenuView($data);
 		$amv->render();
 	}
 
@@ -104,12 +104,12 @@ class ApartamentosController extends ControllerRest
 			header('location: /login/');
 			return;
 		}
-		$u = new ApartamentoModel();
-		if(isset($this->_POST["nombre"]))$u->nombre = $this->_POST["nombre"]; 
+		$u = new SectionModel();
+		if(isset($this->_POST["name"]))$u->name = $this->_POST["name"]; 
 		
-		if(isset($this->_POST["edificio"])){
-			$a  = new EdificioModel();
-			$a->ID = $this->_POST["edificio"];
+		if(isset($this->_POST["workspace"])){
+			$a  = new WorkspaceModel();
+			$a->ID = $this->_POST["workspace"];
 			$u->edificio = $a;
 		}
 	/*	if(isset($this->_POST["propietario"])){
@@ -117,15 +117,15 @@ class ApartamentosController extends ControllerRest
 			$a->ID = $this->_POST["propietario"];
 			$u->propietario = $a;
 		}*/
-		if(isset($this->_POST["cliente"]) && $user->is_admin()){
+		if(isset($this->_POST["client"]) && $user->is_admin()){
 			$a  = new UserModel();
-			$a->ID = $this->_POST["cliente"];
-			$u->cliente = $a;
+			$a->ID = $this->_POST["client"];
+			$u->client = $a;
 		}else {
-			$u->cliente = $user;
+			$u->client = $user;
 		}
-		$cond = [["nombre","=",$u->nombre], ["edificio","=",$u->edificio->ID]];
-		if(count(ApartamentoModel::all_where_and($cond)))$error = true;
+		$cond = [["name","=",$u->name], ["edificio","=",$u->edificio->ID]];
+		if(count(SectionModel::all_where_and($cond)))$error = true;
 		$respose = new stdClass;
 		if(!$error && $u->save())
 		

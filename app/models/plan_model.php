@@ -21,40 +21,40 @@ class PlanModel extends Model
 		$plan->precio_edificio= 0;
 		$plan->precio_habitante = 0;
 		$plan->precio_apartamento = 2500;
-		$plan->descripcion = "Plan Basico";
+		$plan->descripcion = "Basic";
 		$plan->save();
-				$plan = new PlanModel();
+		$plan = new PlanModel();
 		$plan->iva = 0.19;
 		$plan->gracia = 0;
 		$plan->precio_edificio= 0;
 		$plan->precio_habitante = 0;
 		$plan->precio_apartamento = 2300;
-		$plan->descripcion = "Plan Standard";
+		$plan->descripcion = "Standard";
 		$plan->save();
-				$plan = new PlanModel();
+		$plan = new PlanModel();
 		$plan->iva = 0.19;
 		$plan->gracia = 0;
 		$plan->precio_edificio= 0;
 		$plan->precio_habitante = 0;
 		$plan->precio_apartamento = 2000;
-		$plan->descripcion = "Plan Premium";
+		$plan->descripcion = "Premium";
 		$plan->save();
 	}
 
 
 	public function factura_exist($client){
-		$cond = [["cliente","=",$client->get_key()]];
-		$cond[] = ["moth(create_at)","=",date("m")];
-		$cond[] = ["year(create_at)","=",date("y")];
+		$cond = [["client","=",$client->get_key()]];
+		$cond[] = ["moth(created_at)","=",date("m")];
+		$cond[] = ["year(created_at)","=",date("y")];
 		$c = FacturaModel::count($cond);
 		return intval( $c) > 0;
 	}
 
 	public function make_factura($client){
 		$f = new  FacturaModel();
-		$monto = $client->get_apartamentos_count() * $this->precio_apartamento +
-		$client->get_habitantes_count() * $this->precio_habitante +
-		$client->get_edificios_count()*$this->precio_edificio;
+		$monto = $client->get_sections_count() * $this->precio_apartamento +
+		$client->get_employees_count() * $this->precio_habitante +
+		$client->get_workspaces_count()*$this->precio_edificio;
 		$monto += $monto*$this->iva;
 		$f->monto = $monto;
 		$f->cliente = $client;

@@ -1,12 +1,12 @@
 <?php
-class HabitantesTemplate extends Template{
+class EmployeesTemplate extends Template{
 
 	function config(){
 		$this->set_parent("layout");
 		$this->add_part("paginator","paginator");
 		$this->add_part("topbar","topbar");
 		$this->add_part("table","table");
-		$this->add_part("modalresidente","modalresidente");
+		$this->add_part("modalemployee","modalemployee");
 		$this->add_part("viewmodal","viewmodal");
 		$this->add_part("askmodal","askmodal");
 	}
@@ -15,7 +15,7 @@ class HabitantesTemplate extends Template{
 		$c = $this->T("count");
 		$p = $this->T("page");
 		$this->render_part("topbar"); 
-		$this->render_part("modalresidente");
+		$this->render_part("modalemployee");
 		$this->render_part("viewmodal");
 		$this->render_part("askmodal");
 		?>
@@ -38,6 +38,5 @@ if($c > 0):
 <?php $this->render_part("paginator");?>
 </div>
 <?php 
-
 	}
 }

@@ -1,5 +1,5 @@
 <?php
-class EdificiosTemplate extends Template{
+class WorkspacesTemplate extends Template{
 
 	function config(){
 		$this->set_parent("layout");
@@ -27,7 +27,7 @@ class EdificiosTemplate extends Template{
 	<div class="row">
 
 	<div class="col-md-3 col-sm-6">
-	<a type="button"  data-toggle="modal" data-target="#formModal" class="btn btn-primary btn-add  m-3 " > <i class="fa fa-building"></i> Nuevo Edificio</a>
+	<a type="button"  data-toggle="modal" data-target="#formModal" class="btn btn-primary btn-add  m-3 " > <i class="fa fa-building"></i> Nueva Empresa</a>
 	</div>
 	</div>
 	<hr/>

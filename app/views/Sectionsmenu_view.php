@@ -3,7 +3,7 @@ require_once "core/View.php";
 /**
  * 
  */
-class ApartamentosmenuView extends View
+class SectionsmenuView extends View
 {
 	
 	function config()

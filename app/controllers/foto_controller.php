@@ -19,11 +19,11 @@ class FotoController extends ControllerRest
 			header('location: /login/');
 			return;
 		}
-		$id = $_POST['identificacion'];
-		$apartamento  = $_POST['apartamento'];
+		$id = $_POST['document_id'];
+		$section  = $_POST['section'];
 		$visitado = $_POST['visitado'];
-		$nombre = $_POST['nombre'];
-		$vista = new FotoView(array('id'=>$id,'user'=>$user,'apartamento'=>$apartamento,'visitado'=>$visitado,'nombre'=>$nombre ));
+		$name = $_POST['name'];
+		$vista = new FotoView(array('id'=>$id,'user'=>$user,'section'=>$section,'visitado'=>$visitado,'name'=>$name ));
 		return $vista->render();
 	}
 
@@ -37,30 +37,30 @@ class FotoController extends ControllerRest
 			header('location: /login/');
 			return;
 		}
-		$id = $_POST['identificacion'];
-		$apartamento  = $_POST['apartamento'];
+		$id = $_POST['document_id'];
+		$section  = $_POST['section'];
 		$visitado = $_POST['visitado'];
-		$vis = new HabitanteModel();
+		$vis = new EmployeeModel();
 		$vis->ID = $visitado; 
-		$nombre = $_POST['nombre'];
-		$foto = $_POST['foto'];
+		$name = $_POST['name'];
+		$photo = $_POST['photo'];
 		$visita  = new VisitaModel();
-		$visita->nombre = $nombre;
-		$visita->identificacion = $id;
-		$a = new ApartamentoModel();
-		$a->ID = $apartamento;
+		$visita->name = $name;
+		$visita->document_id = $id;
+		$a = new SectionModel();
+		$a->ID = $section;
 		$visita->destino= $a;
 
-		$visita->foto = $foto;
-		$foto = explode(',',$foto)[1];
-		$foto = base64_decode($foto);
-        $link = "/_static/fotos/".uniqid();
+		$visita->photo = $photo;
+		$photo = explode(',',$photo)[1];
+		$photo = base64_decode($photo);
+        $link = "/_static/photos/".uniqid();
         $ext = ".png";
 		
 		$filename = Config::$base_folder. $link.$ext;
 		$ifp = fopen(  $filename, 'wb' ); 
 		
-		fwrite($ifp,$foto);
+		fwrite($ifp,$photo);
 		fclose($ifp);
 		$vis->load();
 		list($ancho, $alto) = getimagesize($filename);
@@ -75,10 +75,10 @@ class FotoController extends ControllerRest
 		$visita->visitado = $vis;
 		$visita->cliente = $user;
 		$user->load();
-		$visita->foto = Config::$base_url.$link.$ext;
+		$visita->photo = Config::$base_url.$link.$ext;
 		$visita->save();
 		$mail = new PHPMailer(true);
-		try {
+		/*try {
 		    //Server settings
 		//    $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      
 		    $mail->isSMTP();                                           
@@ -89,9 +89,9 @@ class FotoController extends ControllerRest
 	//	    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;          
 		    $mail->Port       = Config::$mail_port;                                 
 		    $mail->setFrom('asistencia@remotepcsolutions.com', 'Control de Visitas');
-		    $mail->addAddress($vis->email, $vis->nombre);     //Add a recipient
+		    $mail->addAddress($vis->email, $vis->name);     //Add a recipient
 	
-			$mail->addAttachment($vis->foto, 'foto.jpg');    //Optional name
+			$mail->addAttachment($vis->photo, 'photo.jpg');    //Optional name
 
 		    //Content
 		    $mail->isHTML(true);                                  //Set email format to HTML
@@ -99,15 +99,15 @@ class FotoController extends ControllerRest
 		    $mail->Body    = "<h1>Sistema de control de visitas</h1>"
 		    ."<h2>{$user->titulo}</h2>"
 		    .'<h3>Tiene una nueva visita<h3>'
-		    ."<p> Nombre: {$visita->nombre}"
-		    ."<p> Identificación: {$visita->identificacion}";
+		    ."<p> Nombre: {$visita->name}"
+		    ."<p> Identificación: {$visita->document_id}";
 		 //   $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
 		    $mail->send();
 		  //  echo 'Message has been sent';
 		} catch (Exception $e) {
 		    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-		}
+		}*/
 		 header('location: /saludo');
 	}
 }
