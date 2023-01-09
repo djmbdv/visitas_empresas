@@ -1,11 +1,11 @@
-# Visitas 0.0.1
+# Visitas Enterprise 0.0.1
 
-https://visitas.remotepcsolutions.com
+https://ve.remotepcsolutions.com
 
 
 ## Installation
 
-Visitas requires [Docker](https://www.docker.com/) to run.
+Visitas Enterprise requires [Docker](https://www.docker.com/) to run.
 
 Run docker containers:
 
