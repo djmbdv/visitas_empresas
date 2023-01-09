@@ -20,7 +20,7 @@ class Router {
 
 	public function set_link($str){
 		$this->link = $str;
-		$l = preg_split ('/\//',$this->link, 2);
+		$l = explode ('/',$this->link ?? "", 2);
 		
 		$this->head = $l[0];
 	 	$this->tail = isset($l[1])?$l[1]:null;
