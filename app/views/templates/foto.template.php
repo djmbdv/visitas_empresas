@@ -24,7 +24,7 @@ class FotoTemplate extends Template
 		<h5 class="text-center p-3 mt-3">TOMAR FOTO</h5> 
 		<form class="form-foto" action="/visita/" method="post" >
 			<div class="form-group">
-				<input type="hidden" name="nombre" value="<?= $this->T('nombre') ?>"/>
+				<input type="hidden" name="name" value="<?= $this->T('name') ?>"/>
 				<input type="hidden" name="apartamento" value="<?= $this->T('apartamento') ?>" />
 				<input type="hidden" name="visitado" value="<?= $this->T('visitado') ?>" />
 				<input type="hidden" name="identificacion" value="<?= $this->T('id') ?>">

@@ -110,7 +110,7 @@ class SectionsController extends ControllerRest
 		if(isset($this->_POST["workspace"])){
 			$a  = new WorkspaceModel();
 			$a->ID = $this->_POST["workspace"];
-			$u->edificio = $a;
+			$u->workspace = $a;
 		}
 	/*	if(isset($this->_POST["propietario"])){
 			$a  = new HabitanteModel();
@@ -124,7 +124,7 @@ class SectionsController extends ControllerRest
 		}else {
 			$u->client = $user;
 		}
-		$cond = [["name","=",$u->name], ["edificio","=",$u->edificio->ID]];
+		$cond = [["name","=",$u->name], ["workspace","=",$u->workspace->ID]];
 		if(count(SectionModel::all_where_and($cond)))$error = true;
 		$respose = new stdClass;
 		if(!$error && $u->save())

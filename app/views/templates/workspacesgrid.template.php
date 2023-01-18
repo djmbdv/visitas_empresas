@@ -1,6 +1,6 @@
 <?php
 
-class EdificiosgridTemplate extends Template{
+class WorkspacesgridTemplate extends Template{
 
 
 	function render(){ 
@@ -31,7 +31,7 @@ class EdificiosgridTemplate extends Template{
 foreach($this->T('items') as $it):
 	$it->load();?>
 	<div class="card text-center border-dark mb-2 py-1">
-		<img style="width: 100px;" class="px-auto mx-auto " src="<?= $this->S("images/edificio.png") ?>" class="card-img-top" alt="<?= $it->nombre ?>">
+		<img style="width: 100px;" class="px-auto mx-auto " src="<?= $this->S("images/edificio.png") ?>" class="card-img-top" alt="<?= $it->name ?>">
   		<div class="card-body">	
 		
 		 <h5 class="card-title"><?= $it->name ?></h5>

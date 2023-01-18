@@ -5,6 +5,8 @@ class Template {
 	public $parent;
 	public $child;
 	public $model;
+	public $filtros;
+	
 	function __construct($model){
 		$this->parts = [];
 		$this->model = $model;

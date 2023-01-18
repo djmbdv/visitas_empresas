@@ -1,9 +1,12 @@
 <?php
 
 require_once "core/Model.php";
+require_once "blood_type.php";
 /**
  * 
  */
+
+
 class VisitaModel extends Model
 {
 	public $name;
@@ -14,15 +17,18 @@ class VisitaModel extends Model
 	public EmployeeModel $host;
 	public $subject;
 	public UserModel $client;
-
-
+	public BloodTypeEnum $blood_type;
+	public $motive;
+	public EpsEnum $eps;
+	public ArlEnum $arl;
+	
 	public static function types_array(){
 		return array(
 			'name' => "VARCHAR( 150 ) NOT NULL",
 			'destiny' => "INT( 11 ) NOT NULL",
 			'photo' => ' MEDIUMBLOB NOT NULL',
 			'host'=>'int (11) NOT NULL',
-			'telephone' => 'VARCHAR (20) NOT NULL',
+			'telephone' => 'VARCHAR (20)',
 			'document_id'=>'VARCHAR (20) NOT NULL',
 			'client' => 'int (11) NOT NULL'
  		);

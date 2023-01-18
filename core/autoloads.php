@@ -46,3 +46,19 @@ function autoload_model($nombreClase) {
 
 
 spl_autoload_register('autoload_model');
+
+
+function autoload_enum($nombreClase) {
+	if(preg_match("/([\S]*)Enum/", $nombreClase, $matches)){
+		$archivo = "app/models/".strtolower($matches[1]).'_enum.php';
+		if(file_exists($archivo)) {
+        	require_once($archivo);
+    	} else {
+    		throw new Exception("Error Processing Request", 1);
+    		
+       		 die("El archivo $archivo no se ha podido encontrar.");
+    	}
+	}
+}
+
+spl_autoload_register('autoload_enum');

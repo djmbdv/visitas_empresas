@@ -15,23 +15,18 @@ class SectionModel extends Model
 			'client' => 'INT (11) NOT NULL'
 	 	);
 	}
+
 	public static function form_types_array(){
 		return array(
 		'workspace' => "select"
  		);
 	}
 
-	/*public static function descriptions_array(){
-		return array(
-		'name' => "Nombre",
- 		);
-	}*/
-
 	public static function seeds(){
 		$propietarios = EmployeeModel::all();
 		for($i = 0; $i < 25; $i++){
 			$a =  new SectionModel();
-			$a->name = "oficina - ".random_int(1000, 2000);
+			$a->name = "office - ".random_int(1000, 2000);
 			$a->workspace = WorkspaceModel::all()[0];
 			$a->client = UserModel::all()[0]; 
 		    $a->save();

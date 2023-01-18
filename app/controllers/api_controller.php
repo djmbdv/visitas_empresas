@@ -11,6 +11,22 @@ class ApiController extends Controller{
 		$section = $_POST["section"]??null;
 		print_r(EmployeeModel::search_name($name,12,$section));
 	}
+
+	public function search_bloodTypes(){
+		header("Content-type:application/json");
+		$name = $_POST["s"] ?? "";
+		print_r(json_encode(array_map(function($val){ return (object) ['id' => $val, 'presentation'=> $val]; } ,BloodTypeEnum::cases())));
+	}
+	public function search_eps(){
+		header("Content-type:application/json");
+		$name = $_POST["s"] ?? "";
+		print_r(json_encode(array_map(function($val){ return (object) ['id' => $val, 'presentation'=> $val]; } ,EpsEnum::cases())));
+	}
+	public function search_arl(){
+		header("Content-type:application/json");
+		$name = $_POST["s"] ?? "";
+		print_r(json_encode(array_map(function($val){ return (object) ['id' => $val, 'presentation'=> $val]; } ,ArlEnum::cases())));
+	}
 	public function search_users(){
 		header("Content-type:application/json");
 		$name = $_POST["s"]?? "";
@@ -29,8 +45,8 @@ class ApiController extends Controller{
 	public function search_sections(){
 		header("Content-type:application/json");
 		$name = $_POST["s"] ??  "";
-		$edificio = $_POST["edificio"]??null;
-		print_r(SectionModel::search_name($name,12,$edificio));
+		$workspace = $_POST["workspace"]??null;
+		print_r(SectionModel::search_name($name,12,$workspace));
 	}
 	public function search_workspaces(){
 		header("Content-type:application/json");

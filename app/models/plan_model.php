@@ -11,14 +11,14 @@ class PlanModel extends Model
 	protected $descripcion;
 	protected $iva;
 	protected $precio_apartamento;
-	protected $precio_edificio;
+	protected $precio_workspace;
 	protected $precio_habitante; 
 	protected $gracia;
 	public static function seeds(){
 		$plan = new PlanModel();
 		$plan->iva = 0.19;
 		$plan->gracia = 0;
-		$plan->precio_edificio= 0;
+		$plan->precio_workspace= 0;
 		$plan->precio_habitante = 0;
 		$plan->precio_apartamento = 2500;
 		$plan->descripcion = "Basic";
@@ -26,7 +26,7 @@ class PlanModel extends Model
 		$plan = new PlanModel();
 		$plan->iva = 0.19;
 		$plan->gracia = 0;
-		$plan->precio_edificio= 0;
+		$plan->precio_workspace= 0;
 		$plan->precio_habitante = 0;
 		$plan->precio_apartamento = 2300;
 		$plan->descripcion = "Standard";
@@ -34,7 +34,7 @@ class PlanModel extends Model
 		$plan = new PlanModel();
 		$plan->iva = 0.19;
 		$plan->gracia = 0;
-		$plan->precio_edificio= 0;
+		$plan->precio_workspace= 0;
 		$plan->precio_habitante = 0;
 		$plan->precio_apartamento = 2000;
 		$plan->descripcion = "Premium";
@@ -54,7 +54,7 @@ class PlanModel extends Model
 		$f = new  FacturaModel();
 		$monto = $client->get_sections_count() * $this->precio_apartamento +
 		$client->get_employees_count() * $this->precio_habitante +
-		$client->get_workspaces_count()*$this->precio_edificio;
+		$client->get_workspaces_count()*$this->precio_workspace;
 		$monto += $monto*$this->iva;
 		$f->monto = $monto;
 		$f->cliente = $client;
@@ -76,7 +76,7 @@ class PlanModel extends Model
 		'iva' => "decimal ( 4,3 ) NOT NULL",
 		'precio_apartamento' =>"decimal (12,2) not null ",
 		'precio_habitante' =>"decimal (12,2) not null ",
-		'precio_edificio' =>"decimal (12,2) not null "
+		'precio_workspace' =>"decimal (12,2) not null "
  		);
 	}
 

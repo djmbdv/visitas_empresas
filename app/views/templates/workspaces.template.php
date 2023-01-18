@@ -5,7 +5,7 @@ class WorkspacesTemplate extends Template{
 		$this->set_parent("layout");
 		$this->add_part("paginator","paginator");
 		$this->add_part("topbar","topbar");
-		$this->add_part("edificiosgrid","edificiosgrid");
+		$this->add_part("workspacesgrid","workspacesgrid");
 		$this->add_part("modal","modal");
 		$this->add_part("viewmodal","viewmodal");
 		$this->add_part("askmodal","askmodal");
@@ -33,7 +33,7 @@ class WorkspacesTemplate extends Template{
 	<hr/>
 <?php 
 if($c > 0): 
-	$this->render_part("edificiosgrid");
+	$this->render_part("workspacesgrid");
  else: ?>
 	<h1>No hay Registros</h1>
 <?php endif; ?>

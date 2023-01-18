@@ -52,6 +52,9 @@ $main_router->link("visita",$fc,"visita");
 	$api_router->link("section",$apic,"get_section");
 	$api_router->link("sections",$apic,"search_sections");
 	$api_router->link("workspaces",$apic,"search_workspaces");
+	$api_router->link("bloodTypes",$apic,"search_bloodTypes");
+	$api_router->link("eps",$apic,"search_eps");
+	$api_router->link("arl",$apic,"search_arl");
 	$api_router->link("plans",$apic,"search_plans");
 
 	$api_router->link("workspace",$apic,"get_workspace");

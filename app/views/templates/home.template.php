@@ -53,6 +53,53 @@ $this->add_part("campoWorkspace","campo",
 		 		'children' => ['inputSection']
 		  )
 		);
+		$this->add_part("campoBloodType","campo",
+		array('name' => "bloodType" ,
+				'autocomplete' => false,
+				'required' => true,
+				'placeholder'=> "Tipo de Sangre",
+				'end_point'=> '/api/bloodTypes/',
+				'autocomplete_att'=>'s',
+				'clase'=> 'bloodTypes',
+				'add_class' => 'col-md-12',
+				'form_type' => 'select',
+				'size'=> 'lg',
+				'autoload'=>true,
+				'attributes'=>  array('s' => "" ),
+		 )
+	   );
+	   $this->add_part("campoEps","campo",
+	   array('name' => "eps" ,
+			   'autocomplete' => false,
+			   'required' => true,
+			   'placeholder'=> "EPS",
+			   'end_point'=> '/api/eps/',
+			   'autocomplete_att'=>'s',
+			   'clase'=> 'eps',
+			   'add_class' => 'col-md-12',
+			   'form_type' => 'select',
+			   'size'=> 'lg',
+			   'autoload'=>true,
+			   'attributes'=>  array('s' => "" ),
+		)
+	  );
+
+	  $this->add_part("campoArl","campo",
+	  array('name' => "arl" ,
+			  'autocomplete' => false,
+			  'required' => true,
+			  'placeholder'=> "ARL",
+			  'end_point'=> '/api/arl/',
+			  'autocomplete_att'=>'s',
+			  'clase'=> 'arl',
+			  'add_class' => 'col-md-12',
+			  'form_type' => 'select',
+			  'size'=> 'lg',
+			  'autoload'=>true,
+			  'attributes'=>  array('s' => "" ),
+	   )
+	 );
+
 
 	$this->render_part("pin");
 		?>
@@ -71,12 +118,23 @@ $this->add_part("campoWorkspace","campo",
 	<div class="col-md-6">
 		<h4 class="text-center p-3 mt-3">DATOS</h4> 
 		<form  class="form-row" action="/foto" method="post">
-
 			<?php $this->render_part("campoWorkspace");?>
 			<?php $this->render_part("campoSection");?>
 			<?php $this->render_part("campoVisitado");?>
+			<?php $this->render_part("campoBloodType");?>
+			<?php $this->render_part("campoEps");?>
+			<?php $this->render_part("campoArl");?>
 			<div class="form-group  col-md-12">
-				<input class="form-control form-control-lg " type="text" name="nombre" placeholder="Su Nombre y Apellido" required="" />
+				<input class="form-control form-control-lg " type="text" name="name" placeholder="Su Nombre y Apellido" required="" />
+			</div>
+			<div class="form-group  col-md-12">
+				<input class="form-control form-control-lg " type="tel" name="telephone" placeholder="Telefono" required="" />
+			</div>
+			<div class="form-group  col-md-12">
+				<input class="form-control form-control-lg " type="text" name="motive" placeholder="Motivo (Opcional)" />
+			</div>
+			<div class="form-group  col-md-12">
+				<input class="form-control form-control-lg " type="text" name="company" placeholder="Empresa (Opcional)" />
 			</div>
 			<div class="form-group  col-md-12">
 				<input class="form-control form-control-lg " type="text" name="identificacion" placeholder="Numero de Identificacion" required="" />

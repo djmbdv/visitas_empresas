@@ -3,7 +3,6 @@ require_once "core/Controller.php";
 require_once "core/Session.php";
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\IOFactory;
-use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 /**
  * 
  */
@@ -109,9 +108,7 @@ class VisitasController extends ControllerRest
 				$cond = $condv;
 				$cond[] = ["host","=","{$apartamento->ID}"];
 				$visitas = VisitaModel::all_where_and($cond,null,null,true);
-				//print_r($visitas);
 				foreach ($visitas as $visita) {
-					//print_r($myWorkSheet);
 					$spreadsheet->setActiveSheetIndex($build)
 					->setCellValue('C'.$linea, $visita->name)
 					->setCellValue('B'.$linea, "".$visita->document_id)

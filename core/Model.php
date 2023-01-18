@@ -288,9 +288,10 @@ abstract class Model{
 				$k == 'index_name' ||
 				$k == 'isLoaded'  ||
 				$k == self::$index_name ||
-				$k == 'transform_in_array'
+				$k == 'transform_in_array' ||
+				!isset($this->{$k})
 				)continue;
-				$value = is_subclass_of($this->{$k},get_class())?
+				$value = $this->{$k} && is_subclass_of($this->{$k},get_class())?
 					($this->{$k})->get_key():
 					$this->{$k};
 				if($count++ == 0)$sql.=" set $k = '$value' ";
@@ -442,13 +443,14 @@ abstract class Model{
 				$att == 'transform_in_array' ||
 				$att == 'isLoaded'  ||
 				$att == self::$index_name
-			)
-					continue;
+			) continue;
 
 			try{
 				$rp = new ReflectionProperty(get_called_class(), $att);
 				$tipo =  $rp->getType()->getName();
 				if(is_subclass_of($tipo, get_class())){
+					$sql.=",$att  INT( 11 )";
+				}else if(enum_exists($tipo)){
 					$sql.=",$att  INT( 11 )";
 				}else throw new Exception("Error Processing Request", 1);
 			}catch (Throwable $t){

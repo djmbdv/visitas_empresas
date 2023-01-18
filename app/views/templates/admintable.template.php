@@ -96,11 +96,11 @@ endforeach;
 			$plan->load();
 			//print_r($plan->get_vars());
 			if($plan->precio_apartamento > 0)echo "Precio * Sections (".($plan->precio_apartamento)."): ".($it->get_sections_count()*$plan->precio_apartamento). "<br>";
-			if($plan->precio_edificio > 0)echo "Precio * Workspace (".($plan->precio_edificio)."): ".($it->get_workspaces_count()*$plan->precio_edificio). "<br>";
-			if($plan->precio_habitante > 0)echo "Precio * Empleado (".($plan->precio_edificio)."): ".($it->get_workspaces_count()*$plan->precio_habitante). "<br>";
+			if($plan->precio_workspace > 0)echo "Precio * Workspace (".($plan->precio_workspace)."): ".($it->get_workspaces_count()*$plan->precio_workspace). "<br>";
+			if($plan->precio_habitante > 0)echo "Precio * Empleado (".($plan->precio_workspace)."): ".($it->get_workspaces_count()*$plan->precio_habitante). "<br>";
 			$monto = $it->get_sections_count() * $plan->precio_apartamento +
 			$it->get_employees_count() * $plan->precio_habitante +
-			$it->get_workspaces_count()*$plan->precio_edificio;
+			$it->get_workspaces_count()*$plan->precio_workspace;
 			echo "Subtotal: ".$monto."<br>";
 			if($plan->iva)echo "IVA (".($plan->iva*100)."%): ".($monto*$plan->iva)."<br>";
 			if($plan->iva)echo "<b>Total</b>: ".($monto+$monto*$plan->iva).'<br>';
