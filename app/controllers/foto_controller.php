@@ -52,8 +52,8 @@ class FotoController extends ControllerRest
 		$visita->destino= $a;
 
 		$visita->photo = $photo;
-		$photo = explode(',',$photo)[1];
-		$photo = base64_decode($photo);
+		$photo = explode(',',$photo ?? "")[1];
+		$photo = base64_decode($photo ?? "");
         $link = "/_static/photos/".uniqid();
         $ext = ".png";
 		

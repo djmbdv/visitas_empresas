@@ -71,8 +71,7 @@ class EmployeeModel extends Model
 			$apellidos = array('Rios','Gutierrez','Martinez', 'Gonzalez', 'Patiño','Alzolar', 'Noriega', 'Pastrano', 'Peres','Ruiz', 'Aguilera','Sarmiento','Garcia','Hernandez','Coa', 'Espejo', 'Calvo', 'Cabello','Bello','Feo','Leon', 'Sotillo','Bolivar','Marcano','Miranda', 'Smith','Matsumoto', 'Chang', 'Marquez','Suarez','Herrera', 'Arenas','Landaez', 'Fuentes', 'Fernandez', 'Padilla','Infante','Gomez', 'Doni', 'Bozzi','Pacheco','Agreda','Espada', 'Sierra','Colmenares');
 			$array = array("Juan" ,"Fabio",
 				"Alfredo","Jaime","Adolfo","Casimiro", "Fabio", "Jean", "Doni","Tarek","Daniel", "Maria", "Espejo","Fabian", "Rosa", "David", "Juan","Pedro","McGregor", "Messi", "Antonia", "Adriana", "Jonh", "Linda" );
-			$section = SectionModel::all()[0];
-			$employee->section = $section ?? new SectionModel();
+			$employee->section = SectionModel::all()[0] ?? new SectionModel();
 	//		$h->telefono = random_int(1000, 2000);
 			$employee->email = strtolower($array[random_int(0,count($array)-1)].random_int(1000, 2000).'@gmail.com');
 			$employee->name = ucfirst( $array[random_int(0,count($array)-1)])." ".ucfirst($apellidos[random_int(0,count($apellidos)-1)]);

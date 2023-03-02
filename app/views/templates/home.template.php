@@ -137,7 +137,7 @@ $this->add_part("campoWorkspace","campo",
 				<input class="form-control form-control-lg " type="text" name="company" placeholder="Empresa (Opcional)" />
 			</div>
 			<div class="form-group  col-md-12">
-				<input class="form-control form-control-lg " type="text" name="identificacion" placeholder="Numero de Identificacion" required="" />
+				<input class="form-control form-control-lg " type="text" name="document_id" placeholder="Numero de Identificacion" required="" />
 			</div>
 			<div class="form-group  col-md-12">
 				<input class="form-control btn-primary" type="submit" name="" value="Tomar Foto" />

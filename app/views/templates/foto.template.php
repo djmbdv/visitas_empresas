@@ -25,10 +25,10 @@ class FotoTemplate extends Template
 		<form class="form-foto" action="/visita/" method="post" >
 			<div class="form-group">
 				<input type="hidden" name="name" value="<?= $this->T('name') ?>"/>
-				<input type="hidden" name="apartamento" value="<?= $this->T('apartamento') ?>" />
+				<input type="hidden" name="section" value="<?= $this->T('apartamento') ?>" />
 				<input type="hidden" name="visitado" value="<?= $this->T('visitado') ?>" />
-				<input type="hidden" name="identificacion" value="<?= $this->T('id') ?>">
-				<input id="inputFoto" type="hidden" name="foto" value=""/>
+				<input type="hidden" name="document_id" value="<?= $this->T('id') ?>">
+				<input id="inputFoto" type="hidden" name="photo" value=""/>
 			    <div id="captura"  class="mx-2 p-2" style="border-radius: .2rem;;min-height: 150px; min-width: 250px;background-color: gray;" >
 			    	<p class="info-foto text-center" style="color: white;font-weight: bold;"></p>
 			    	<video id="video" style="width:100%;border-radius: .2rem;;min-width: 250px;background-color: gray;"></video>
