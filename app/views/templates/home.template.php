@@ -34,10 +34,11 @@ $this->add_part("campoSection","campo",
 		 		'form_type' => 'select',
 		 		'attributes'=>  array('s' => "" ),
 		 		'size'=> 'lg',
+				'autoload' => true,
 		 		'children' => ['inputVisitado']
 		  )
 		);
-$this->add_part("campoWorkspace","campo",
+/* $this->add_part("campoWorkspace","campo",
 		 array('name' => "workspace" ,
 		 		'autocomplete' => false,
 		 		'required' => true,
@@ -45,14 +46,14 @@ $this->add_part("campoWorkspace","campo",
 		 		'end_point'=> '/api/workspaces/',
 		 		'autocomplete_att'=>'s',
 		 		'clase'=> 'workspace',
-		 		'add_class' => 'col-md-6',
-		 		'form_type' => 'select',
+		 		'form_type' => 'hidden',
 		 		'size'=> 'lg',
-		 		'autoload'=>true,
+				'value' => $this->T("workspace")->id,
+		 		'autoload'=> true,
 		 		'attributes'=>  array('s' => "" ),
 		 		'children' => ['inputSection']
 		  )
-		);
+		); */
 		$this->add_part("campoBloodType","campo",
 		array('name' => "bloodType" ,
 				'autocomplete' => false,
@@ -118,7 +119,8 @@ $this->add_part("campoWorkspace","campo",
 	<div class="col-md-6">
 		<h4 class="text-center p-3 mt-3">DATOS</h4> 
 		<form  class="form-row" action="/foto" method="post">
-			<?php $this->render_part("campoWorkspace");?>
+		<input name="workspace" entrada="inputWorkspace1" class=" form-control-lg "  type="hidden" name="workspace"  required=""     autocomplete="off" value="<?= $this->T("workspace")->ID ?>">
+				   </input>
 			<?php $this->render_part("campoSection");?>
 			<?php $this->render_part("campoVisitado");?>
 			<?php $this->render_part("campoBloodType");?>

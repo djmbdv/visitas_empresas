@@ -13,13 +13,14 @@ class HomeController extends Controller
 	function index(){
 		Session::load();
 		$user = UserModel::user_logged();
+		$workspace =  WorkspaceModel::all()[0];
 		if(is_null($user)){
 			header('location: /login/');
 			return;
 		}
 		$user->load();
 		//print_r($user);
-		$main_view = new MainView(['user'=>$user]);
+		$main_view = new MainView(['user'=>$user,'workspace'=>$workspace]);
 
 		return $main_view->render();
 	}

@@ -62,12 +62,12 @@ foreach($this->T('items') as $it):
 	elseif($it->get_attribute_type($value) == "mediumblob" ):?>
 		<td><img src="<?= $it->{$value} ?>" class="image-table"></img></td>
 <?php
-	elseif(is_subclass_of($it->{$value}, "Model")): 
+	elseif(isset($it->{$value}) && is_subclass_of($it->{$value}, "Model")): 
 		 	?>
 		<td><?=!is_null( $it->{$value}) && $it->{$value}->exist() ? $it->{$value}->to_str():'' ?></td>
 <?php
 	else:?>
-		<td><?= $it->{$value} ?></td>
+		<td><?=isset( $it->{$value})? $it->{$value}: " " ?></td>
 <?php
 endif; 
 endforeach; 

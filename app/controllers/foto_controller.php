@@ -23,7 +23,7 @@ class FotoController extends ControllerRest
 		$section  = $_POST['section'];
 		$visitado = $_POST['visitado'];
 		$name = $_POST['name'];
-		$vista = new FotoView(array('id'=>$id,'user'=>$user,'section'=>$section,'visitado'=>$visitado,'name'=>$name ));
+		$vista = new FotoView(array('id'=>$id,'user'=>$user,'section'=>$section,'visitado'=>$visitado,'name'=>$name,));
 		return $vista->render();
 	}
 
@@ -47,6 +47,7 @@ class FotoController extends ControllerRest
 		$visita  = new VisitaModel();
 		$visita->name = $name;
 		$visita->document_id = $id;
+		$visita->blood_type =  $_POST["blood_type"];
 		$a = new SectionModel();
 		$a->ID = $section;
 		$visita->destino= $a;

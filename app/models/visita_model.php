@@ -32,11 +32,11 @@ class VisitaModel extends Model
 			'client' => 'int (11) NOT NULL'
  		);
 	}
-	public static function p_destino($x){
+	public static function p_host($x){
 		$str ="";
-		if($x->destiny->exist()){
-		 $x->destiny->load();
-		 $x->destiny->workspace->load();
+		if($x->host->exist()){
+		 $x->host->load();
+		 $x->host->workspace->load();
 		 $str="Workspace: ". $x->destiny->workspace->name." |  Section:".$x->section->name ;
 		}
 		return $str;

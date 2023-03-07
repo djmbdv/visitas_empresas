@@ -47,6 +47,7 @@ abstract class Model{
 			if($key == 0)$sql=" where $value[0] $value[1] '$value[2]'";
 			else $sql.=" and $value[0] $value[1] '$value[2]'";
 		}
+	//	print_r($sql);
 		return self::all($count, $page,$loaded,$sql, $order,$desc);
 	}
 
@@ -122,7 +123,8 @@ abstract class Model{
 			$stmt->bindParam(":key", $key);
 			$stmt->execute();
 			$res = $stmt->fetchAll(PDO::FETCH_ASSOC);
-		
+			//print_r($res);
+			//exit();
 			foreach (get_class_vars(get_called_class()) as $k  => $v){
 				if ($k == 'table_name'||
 				$k == 'types_array'||
@@ -133,15 +135,25 @@ abstract class Model{
 				)continue;
 				try{
 					$rp = new ReflectionProperty(get_called_class(), $k);
-					$tipo =  $rp->getType()->getName();
-					if(is_subclass_of($tipo, get_class())){
-						$o = new $tipo();
-						$o->{$tipo::get_index()} = $res[0][$k];
-						
-						$this->{$k} = $o;
+					//(get_called_class()."\n");
+					//print_r("var:".$k."\n");
+					$type =  $rp->getType();
+///print_r("r_type:".$type."\n");
+					$tipo = $type->getName();
+					//print_r($tipo."\n");
+					//exit();
+					if($tipo){
+						if(enum_exists($tipo)){
+							if(is_int($res[0][$k]))
+							$this->{$k}=  $tipo::cases()[$res[0][$k]];
+						}else{
+							$o = new $tipo();
+							$o->{$tipo::get_index()} = $res[0][$k];
+							$this->{$k} = $o;
+						}
 					}else throw new Exception("Error Processing Request", 1);
 				}catch (Throwable $t){
-					$this->{$k} = isset($res[0][$k])?$res[0][$k]:null;
+					$this->{$k} =  $res[0][$k];
 				}
 			}
 			$this->isLoaded = true;
@@ -294,6 +306,7 @@ abstract class Model{
 				$value = $this->{$k} && is_subclass_of($this->{$k},get_class())?
 					($this->{$k})->get_key():
 					$this->{$k};
+				
 				if($count++ == 0)$sql.=" set $k = '$value' ";
 				else $sql.=",  $k = '$value' ";
 			}
@@ -451,7 +464,9 @@ abstract class Model{
 				if(is_subclass_of($tipo, get_class())){
 					$sql.=",$att  INT( 11 )";
 				}else if(enum_exists($tipo)){
-					$sql.=",$att  INT( 11 )";
+					$enum_values  = array_column($tipo::cases(), 'name');
+					$enum_values = array_reduce($enum_values,fn($v1,$v2)=> $v1?$v1 . "," . "'$v2'" :  "'$v2'");
+					$sql.=",$att  ENUM ( $enum_values )";
 				}else throw new Exception("Error Processing Request", 1);
 			}catch (Throwable $t){
 				$sql.=",$att ".self::search_type($att);
