@@ -8,6 +8,6 @@ class SectionsView extends View
 	
 	function config()
 	{
-		$this->set_template("apartamentos");
+		$this->set_template("sections");
 	}
 }

@@ -22,7 +22,7 @@ class UsersController extends ControllerRest
 		$page = $this->get_param("page");
 		$page = $page?$page:1;	
 		$hv = new UsersView( array(
-			'items' => UserModel::all(20,$page),
+			'items' => UserModel::all(20,$page,true),
 			'user'=> $user,
 			"table_vars" => UserModel::get_vars(),
 			"modal_vars" => UserModel::get_vars(),

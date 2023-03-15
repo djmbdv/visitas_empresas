@@ -1,5 +1,5 @@
 <?php
-class ApartamentosTemplate extends Template{
+class SectionsTemplate extends Template{
 
 	function config(){
 		$this->set_parent("layout");

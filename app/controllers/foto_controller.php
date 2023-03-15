@@ -47,7 +47,7 @@ class FotoController extends ControllerRest
 		$visita  = new VisitaModel();
 		$visita->name = $name;
 		$visita->document_id = $id;
-		$visita->blood_type =  $_POST["blood_type"];
+	//	$visita->blood_type =  $_POST["blood_type"];
 		$a = new SectionModel();
 		$a->ID = $section;
 		$visita->destino= $a;

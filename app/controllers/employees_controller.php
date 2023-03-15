@@ -5,7 +5,7 @@ require_once "core/Session.php";
 /**
  * 
  */
-class employeesController extends ControllerRest
+class EmployeesController extends ControllerRest
 {
 
 	public function get()
@@ -26,12 +26,12 @@ class employeesController extends ControllerRest
 			$condicion2 = [[["sections.id","=","employees.section"],['sections.client',"=",$user->get_key()]],[["workspaces.id","=","sections.workspace"]]];	
 			$vars = array_filter(EmployeeModel::get_vars(),function($a){ return $a != 'client';});
 			$count = EmployeeModel::count($condicion[0]);
-			$items = EmployeeModel::all_inner_join_and(["sections","workspaces"],$condicion2,20,$page,false, "workspaces.name");
+			$items = EmployeeModel::all_inner_join_and(["sections","workspaces"],$condicion2,20,$page,true, "workspaces.name");
 		}else{
 			$condicion = [[["sections.id","=","employees.section"]],[["workspaces.id","=","sections.workspace"]]];
 			$vars = EmployeeModel::get_vars();
 			$count = EmployeeModel::count();
-			$items = EmployeeModel::all_inner_join_and(["sections","workspaces"],$condicion,20,$page,false, "workspaces.name", false);
+			$items = EmployeeModel::all_inner_join_and(["sections","workspaces"],$condicion,20,$page,true, "workspaces.name", false);
 		}
 		$varst  =  $vars;
 		array_unshift($varst, "torre");
@@ -43,7 +43,7 @@ class employeesController extends ControllerRest
 			"modal_class" => 'EmployeeModel',
 			'page'=> $page,
 			'count'=>$count,
-			'title'=>'Residentes'
+			'title'=>'Empleados'
 		));
 		return $hv->render();
 	}

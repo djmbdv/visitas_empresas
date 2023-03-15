@@ -29,7 +29,7 @@ class WorkspacesController extends ControllerRest
 		$page = $this->get_param("page");
 		$page = $page?$page:1;	
 		if(!$user->is_admin()){
-			$condicion = [['cliente','=',$user->get_key()]];	
+			$condicion = [['client','=',$user->get_key()]];	
 			$vars = array_filter(WorkspaceModel::get_vars(),function($a){ return $a != 'client';});
 			$count = WorkspaceModel::count($condicion);
 			$items = WorkspaceModel::all_where_and($condicion,20,$page);	
@@ -46,7 +46,7 @@ class WorkspacesController extends ControllerRest
 			"modal_class" => 'WorkspaceModel',
 			'page'=> $page,
 			'count'=> $count,
-			'title'=>'Empresas'
+			'title'=>'Workspaces'
 		));
 		return $hv->render();
 	}
@@ -62,9 +62,9 @@ class WorkspacesController extends ControllerRest
 		if(isset($this->_POST["client"]) && $user->is_admin()){
 			$a  = new UserModel();
 			$a->ID = $this->_POST["client"];
-			$u->cliente = $a;
+			$u->client = $a;
 		}else {
-			$u->cliente = $user;
+			$u->client = $user;
 		}
 		$respose = new stdClass;
 		if($u->save())

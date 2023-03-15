@@ -29,7 +29,6 @@ class TableTemplate extends Template{
 <table class="table table-hover">
 	<thead class="table-light">
 	    <tr>
-	    	<!--th>Seleccionar</th-->
 <?php
 foreach($this->T('table_vars') as  $value): ?>
 			<th scope="col"><?= ucfirst( $value) ?></th>
@@ -50,8 +49,7 @@ endforeach;
 	</thead>
 	<tbody>
 <?php
-foreach($this->T('items') as $it):
-	$it->load();?>
+foreach($this->T('items') as $it):?>
 	<tr>
 		<!--td class="text-center"><input type="checkbox" name=""></td-->
 <?php
@@ -62,12 +60,12 @@ foreach($this->T('items') as $it):
 	elseif($it->get_attribute_type($value) == "mediumblob" ):?>
 		<td><img src="<?= $it->{$value} ?>" class="image-table"></img></td>
 <?php
-	elseif(isset($it->{$value}) && is_subclass_of($it->{$value}, "Model")): 
+	elseif(is_object($it->{$value})  && is_subclass_of($it->{$value}::class, "Model")): 
 		 	?>
 		<td><?=!is_null( $it->{$value}) && $it->{$value}->exist() ? $it->{$value}->to_str():'' ?></td>
 <?php
 	else:?>
-		<td><?=isset( $it->{$value})? $it->{$value}: " " ?></td>
+		<td><?= print_r($it->{$value}, true) ?></td>
 <?php
 endif; 
 endforeach; 

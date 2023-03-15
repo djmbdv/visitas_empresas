@@ -27,12 +27,13 @@ class SectionsController extends ControllerRest
 			$condicion = [['client','=',$user->get_key()]];	
 			$vars = array_filter(SectionModel::get_vars(),function($a){ return $a != 'client';});
 			$count = SectionModel::count($condicion);
-			$items = SectionModel::all_where_and($condicion,20,$page);	
+			$items = SectionModel::all_where_and($condicion,20,$page, true);	
 		}else{
 			$vars = SectionModel::get_vars();
 			$count = SectionModel::count();
-			$items = SectionModel::all(20,$page);
+			$items = SectionModel::all(20,$page,true);
 		}
+	//	print_r($items);
 		$hv = new SectionsView( array(
 			'items' => $items,
 			'user'=> $user,
@@ -112,11 +113,6 @@ class SectionsController extends ControllerRest
 			$a->ID = $this->_POST["workspace"];
 			$u->workspace = $a;
 		}
-	/*	if(isset($this->_POST["propietario"])){
-			$a  = new HabitanteModel();
-			$a->ID = $this->_POST["propietario"];
-			$u->propietario = $a;
-		}*/
 		if(isset($this->_POST["client"]) && $user->is_admin()){
 			$a  = new UserModel();
 			$a->ID = $this->_POST["client"];

@@ -16,7 +16,7 @@ class HomeTemplate extends Template{
 		 		'placeholder'=> "Nombre de la persona a visitar",
 		 		'end_point'=> '/api/employees/',
 		 		'autocomplete_att'=>'s',
-		 		'add_class' => 'col-md-12',
+		 		'add_class' => 'col-md-6',
 		 		'form_type' => 'select',
 		 		'attributes'=>  array('s' => "" ),
 		 		'size'=> 'lg'
@@ -62,7 +62,7 @@ $this->add_part("campoSection","campo",
 				'end_point'=> '/api/bloodTypes/',
 				'autocomplete_att'=>'s',
 				'clase'=> 'bloodTypes',
-				'add_class' => 'col-md-12',
+				'add_class' => 'col-md-6',
 				'form_type' => 'select',
 				'size'=> 'lg',
 				'autoload'=>true,
@@ -77,7 +77,7 @@ $this->add_part("campoSection","campo",
 			   'end_point'=> '/api/eps/',
 			   'autocomplete_att'=>'s',
 			   'clase'=> 'eps',
-			   'add_class' => 'col-md-12',
+			   'add_class' => 'col-md-6',
 			   'form_type' => 'select',
 			   'size'=> 'lg',
 			   'autoload'=>true,
@@ -93,7 +93,7 @@ $this->add_part("campoSection","campo",
 			  'end_point'=> '/api/arl/',
 			  'autocomplete_att'=>'s',
 			  'clase'=> 'arl',
-			  'add_class' => 'col-md-12',
+			  'add_class' => 'col-md-6',
 			  'form_type' => 'select',
 			  'size'=> 'lg',
 			  'autoload'=>true,
@@ -111,14 +111,14 @@ $this->add_part("campoSection","campo",
 <div class="container">
 <h1 class="text-center  mt-3 mb-2">Control de Visitas</h1>
 <div class="row" style="border-top: solid 1px  #007bff;">
-	<div class="col-md-6 text-center">
+	<div class="col-md-5 text-center">
 		<h4 class="text-center p-3 mt-3"><?=  $this->T("user")->titulo  ?? "Complejo Habitacional RPS" ?></h4>
 		<img class="img-fluid shadow-2-strong"  src="<?=  $this->T("user")->image  ?? $this->S("images/casita.png") ?>" style="box-shadow: 1px 3px; max-width: 80%; margin: 40px;background-color: white;">
 	</div>
 
-	<div class="col-md-6">
+	<div class="col-md-7">
 		<h4 class="text-center p-3 mt-3">DATOS</h4> 
-		<form  class="form-row" action="/foto" method="post">
+		<form  class="form-row justify-content-md-center" action="/foto" method="post">
 		<input name="workspace" entrada="inputWorkspace1" class=" form-control-lg "  type="hidden" name="workspace"  required=""     autocomplete="off" value="<?= $this->T("workspace")->ID ?>">
 				   </input>
 			<?php $this->render_part("campoSection");?>
@@ -126,22 +126,22 @@ $this->add_part("campoSection","campo",
 			<?php $this->render_part("campoBloodType");?>
 			<?php $this->render_part("campoEps");?>
 			<?php $this->render_part("campoArl");?>
-			<div class="form-group  col-md-12">
+			<div class="form-group  col-md-6">
 				<input class="form-control form-control-lg " type="text" name="name" placeholder="Su Nombre y Apellido" required="" />
 			</div>
-			<div class="form-group  col-md-12">
+			<div class="form-group  col-md-6">
 				<input class="form-control form-control-lg " type="tel" name="telephone" placeholder="Telefono" required="" />
 			</div>
-			<div class="form-group  col-md-12">
+			<div class="form-group  col-md-6">
 				<input class="form-control form-control-lg " type="text" name="motive" placeholder="Motivo (Opcional)" />
 			</div>
-			<div class="form-group  col-md-12">
+			<div class="form-group  col-md-6">
 				<input class="form-control form-control-lg " type="text" name="company" placeholder="Empresa (Opcional)" />
 			</div>
-			<div class="form-group  col-md-12">
+			<div class="form-group  col-md-6">
 				<input class="form-control form-control-lg " type="text" name="document_id" placeholder="Numero de Identificacion" required="" />
 			</div>
-			<div class="form-group  col-md-12">
+			<div class="form-group  col-md-6">
 				<input class="form-control btn-primary" type="submit" name="" value="Tomar Foto" />
 			</div>
 		</form>

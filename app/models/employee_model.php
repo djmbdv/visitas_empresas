@@ -12,7 +12,6 @@ class EmployeeModel extends Model
 	protected $email;
 //	protected $telefono;
 	protected $name;
-	protected $foto;
 //	protected $identificacion;
 	protected UserModel $client;
 	public static function types_array(){
@@ -55,7 +54,7 @@ class EmployeeModel extends Model
 		if(!$user)return;
 		$condicion = [['name','like',"%$name%"]];
 		if($section)$condicion[] = ['section','=',$section];
-		if(!$user->is_admin())$condicion[] = ["cliente","=",$user->get_key()];
+		if(!$user->is_admin())$condicion[] = ["client","=",$user->get_key()];
 		$a = self::all_where_and($condicion, $cantidad,null, true);
 		$k = array_map(function($a){return $a->no_class_values(); }, $a);
 		return json_encode($k);
@@ -76,7 +75,7 @@ class EmployeeModel extends Model
 			$employee->email = strtolower($array[random_int(0,count($array)-1)].random_int(1000, 2000).'@gmail.com');
 			$employee->name = ucfirst( $array[random_int(0,count($array)-1)])." ".ucfirst($apellidos[random_int(0,count($apellidos)-1)]);
 		//	$h->identificacion =  random_int(1000000, 90000000);
-			$employee->photo = $foto;
+		//	$employee->photo = $foto;
 		//var_dump($h);
 			$employee->client = UserModel::all()[0];
 			$employee->save();

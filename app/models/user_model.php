@@ -6,7 +6,7 @@ require_once "core/database.php";
 /**
  * 
  */
-class UserModel extends Model{
+class UserModel extends Model {
 	protected $username;
 	protected $name;
 	protected $password;

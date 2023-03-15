@@ -31,7 +31,7 @@ class VisitasController extends ControllerRest
 		$visitado = $this->get_param("visitado");
 		$page = $page?$page:1;
 		if(!$user->is_admin()){
-			$condicion = [['cliente','=',$user->get_key()]];
+			$condicion = [['client','=',$user->get_key()]];
             if($visitado)$condicion[]=["visitado",'=',$visitado];
             if($desde)$condicion[]=["created_at",'>=', $desde];
             if($hasta)$condicion[]=["created_at", '<=',$hasta.=" 23:59:59"];
@@ -49,7 +49,7 @@ class VisitasController extends ControllerRest
 		}
 		$vv = new VisitasView(array(
 			'items' => $items,
-			'filtros'=> ['desde' => $desde ,'hasta' => $hasta ,'visitado' => $visitado,'apartamento'=>$apartamento],
+			'filtros'=> ['desde' => $desde ,'hasta' => $hasta ,'visitado' => $visitado,'section'=>$apartamento],
 			'user'=> $user,
 			"table_vars" => $vars,
 			'page'=> $page,
